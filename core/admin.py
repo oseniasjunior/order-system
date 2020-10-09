@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core import models, queries
+from core import models
 
 
 # Register your models here.
@@ -60,5 +60,5 @@ class TotalOrderMeansPaymentAdmin(admin.ModelAdmin):
             request,
             extra_context=extra_context,
         )
-        response.context_data['orders'] = list(queries.total_sale_by_means_payment())
+        response.context_data['orders'] = list(models.MeansPaymentOrder.queries.total_sale_by_means_payment())
         return response
