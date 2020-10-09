@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core import models
+from core import models, queries
 
 
 # Register your models here.
@@ -48,3 +48,17 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ['active', 'status']
     list_per_page = 10
     inlines = [OrderItemInLine, MeansPaymentOrderInLine, ]
+
+
+@admin.register(models.TotalOrderMeansPayment)
+class TotalOrderMeansPaymentAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/total_order_means_payment.html'
+    date_hierarchy = 'created_at'
+
+    def changelist_view(self, request, extra_context=None):
+        response = super().changelist_view(
+            request,
+            extra_context=extra_context,
+        )
+        response.context_data['orders'] = list(queries.total_sale_by_means_payment())
+        return response

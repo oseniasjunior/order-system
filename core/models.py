@@ -214,3 +214,10 @@ class MeansPaymentOrder(ModelBase):
 
     def __str__(self):
         return '{} - {}'.format(self.order, self.means_payment.description)
+
+
+class TotalOrderMeansPayment(Order):
+    class Meta:
+        proxy = True
+        verbose_name = _('Total order by means payment ')
+        verbose_name_plural = _('Total order by means payment ')
