@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from core import managers
 
 
 # Create your models here.
@@ -96,6 +97,8 @@ class Product(ModelBase):
         verbose_name=_('Sale price')
     )
 
+    objects = managers.ProductQuerySet.as_manager()
+
     class Meta:
         db_table = 'product'
         verbose_name = _('Product')
@@ -175,6 +178,7 @@ class OrderItem(ModelBase):
         decimal_places=2,
         verbose_name=_('Unit price')
     )
+    objects = managers.OrderItemQuerySet.as_manager()
 
     class Meta:
         db_table = 'order_item'
@@ -206,6 +210,8 @@ class MeansPaymentOrder(ModelBase):
         decimal_places=2,
         verbose_name=_('Value')
     )
+
+    objects = managers.MeansPaymentOrderQuerySet.as_manager()
 
     class Meta:
         db_table = 'means_payment_order'
