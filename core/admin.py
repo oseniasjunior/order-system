@@ -4,7 +4,7 @@ from core import models
 
 # Register your models here.
 @admin.register(models.MeansPayment)
-class MeansPayment(admin.ModelAdmin):
+class MeansPaymentAdmin(admin.ModelAdmin):
     list_display = ['id', 'description', 'modified_at', 'active']
     list_display_links = ['id', 'description', 'modified_at', 'active']
     search_fields = ['description']
@@ -13,7 +13,7 @@ class MeansPayment(admin.ModelAdmin):
 
 
 @admin.register(models.Table)
-class TablePayment(admin.ModelAdmin):
+class TablePaymentAdmin(admin.ModelAdmin):
     list_display = ['id', 'number', 'modified_at', 'active']
     list_display_links = ['id', 'number', 'modified_at', 'active']
     search_fields = ['number']
@@ -22,9 +22,29 @@ class TablePayment(admin.ModelAdmin):
 
 
 @admin.register(models.Product)
-class ProductPayment(admin.ModelAdmin):
+class ProductPaymentAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'sale_price', 'modified_at', 'active']
     list_display_links = ['id', 'name', 'sale_price', 'modified_at', 'active']
     search_fields = ['name', 'sale_price']
     list_filter = ['active']
     list_per_page = 10
+
+
+class OrderItemInLine(admin.TabularInline):
+    model = models.OrderItem
+    extra = 1
+
+
+class MeansPaymentOrderInLine(admin.TabularInline):
+    model = models.MeansPaymentOrder
+    extra = 1
+
+
+@admin.register(models.Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'date', 'table', 'user', 'status', 'modified_at', 'active']
+    list_display_links = ['id', 'date', 'table', 'user', 'status', 'modified_at', 'active']
+    search_fields = ['id', 'date', 'table', 'user']
+    list_filter = ['active', 'status']
+    list_per_page = 10
+    inlines = [OrderItemInLine, MeansPaymentOrderInLine, ]
