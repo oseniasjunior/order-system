@@ -12,3 +12,13 @@ class MeansPaymentFilter(filterset.FilterSet):
     class Meta:
         model = models.MeansPayment
         fields = ['description', 'active', 'year']
+
+
+class ProductFilter(filterset.FilterSet):
+    active = filterset.BooleanFilter(widget=BooleanWidget)
+    price_start = filterset.NumberFilter(field_name='sale_price', lookup_expr='gte')
+    price_end = filterset.NumberFilter(field_name='sale_price', lookup_expr='lte')
+
+    class Meta:
+        model = models.Product
+        fields = ['active', 'price_start', 'price_end']

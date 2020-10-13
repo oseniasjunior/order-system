@@ -20,10 +20,10 @@ class MeansPaymentViewSet(viewsets.ModelViewSet):
     #         return super(MeansPaymentViewSet, self).list(request, *args, **kwargs)
     #     return Response(status=status.HTTP_404_NOT_FOUND)
 
-
+    
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
-    # filter_class = filters.MeansPaymentFilter
+    filter_class = filters.ProductFilter
     ordering_fields = '__all__'
     ordering = ('-id',)
