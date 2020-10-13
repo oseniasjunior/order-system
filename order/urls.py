@@ -20,6 +20,7 @@ from core import viewsets
 
 router = DefaultRouter()
 router.register('means_payment', viewset=viewsets.MeansPaymentViewSet)
+router.register('product', viewset=viewsets.ProductViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

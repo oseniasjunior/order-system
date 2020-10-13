@@ -36,7 +36,7 @@ class OrderItemQuerySet(models.QuerySet):
 
 class ProductQuerySet(models.QuerySet):
     def last_sale(self):
-        subquery = core_models.OrderItem.objects.filter(
+        subquery = core_models.OrderItem.objects.select_related('order').filter(
             product=OuterRef('id')
         ).order_by('-order__date')
 
