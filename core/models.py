@@ -103,6 +103,13 @@ class Product(ModelBase):
         decimal_places=2,
         verbose_name=_('Sale price')
     )
+    balance = models.DecimalField(
+        null=False,
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        verbose_name=_('Balance')
+    )
 
     objects = managers.ProductQuerySet.as_manager()
 

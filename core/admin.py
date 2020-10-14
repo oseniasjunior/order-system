@@ -23,8 +23,8 @@ class TablePaymentAdmin(admin.ModelAdmin):
 
 @admin.register(models.Product)
 class ProductPaymentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'sale_price', 'modified_at', 'active']
-    list_display_links = ['id', 'name', 'sale_price', 'modified_at', 'active']
+    list_display = ['id', 'name', 'sale_price', 'balance', 'modified_at', 'active']
+    list_display_links = ['id', 'name', 'sale_price', 'balance', 'modified_at', 'active']
     search_fields = ['name', 'sale_price']
     list_filter = ['active']
     list_per_page = 10
