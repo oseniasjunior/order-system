@@ -90,8 +90,15 @@ class Product(ModelBase):
         blank=True,
         verbose_name=_('Detail description')
     )
-    sale_price = models.DecimalField(
+    cost_price = models.DecimalField(
         null=False,
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        verbose_name=_('Cost price')
+    )
+    sale_price = models.DecimalField(
+        null=True,
         max_digits=10,
         decimal_places=2,
         verbose_name=_('Sale price')

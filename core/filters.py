@@ -25,6 +25,7 @@ class ProductFilter(filterset.FilterSet):
     price_start = filterset.NumberFilter(field_name='sale_price', lookup_expr='gte')
     price_end = filterset.NumberFilter(field_name='sale_price', lookup_expr='lte')
     sale_price = NumberInFilter(lookup_expr='in')
+    id = NumberInFilter(lookup_expr='in')
 
     @staticmethod
     def filter_name_or_detail_description(queryset, name, value):
@@ -32,4 +33,4 @@ class ProductFilter(filterset.FilterSet):
 
     class Meta:
         model = models.Product
-        fields = ['active', 'price_start', 'price_end', 'sale_price', 'name_or_detail_description']
+        fields = ['active', 'price_start', 'price_end', 'sale_price', 'name_or_detail_description', 'id']
