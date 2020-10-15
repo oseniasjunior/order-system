@@ -241,3 +241,12 @@ class TotalOrderMeansPayment(Order):
         proxy = True
         verbose_name = _('Total order by means payment ')
         verbose_name_plural = _('Total order by means payment ')
+
+
+class Test(ModelBase):
+    description = models.TextField(
+        null=False
+    )
+
+    class Meta:
+        db_table = 'test'

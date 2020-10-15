@@ -12,3 +12,10 @@ class ProductActions:
     def calculate_sale_price(product: 'models.Product'):
         if product.sale_price is None:
             product.sale_price = product.cost_price + (product.cost_price * Decimal(0.3))
+
+
+class TestActions:
+    @staticmethod
+    def populate():
+        for index in range(1000 * 10):
+            models.Test.objects.create(description='teste - {}'.format(index))
