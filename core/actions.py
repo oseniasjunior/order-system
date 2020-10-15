@@ -1,5 +1,5 @@
 from decimal import Decimal
-from core import models
+from core import models, helpers
 
 
 class ProductActions:
@@ -18,4 +18,5 @@ class TestActions:
     @staticmethod
     def populate():
         for index in range(1000 * 10):
+            helpers.send_channel_message('test', {'index': index})
             models.Test.objects.create(description='teste - {}'.format(index))
