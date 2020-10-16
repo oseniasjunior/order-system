@@ -17,6 +17,15 @@ class ProductActions:
 class TestActions:
     @staticmethod
     def populate():
+        # helpers.send_channel_message('test', {'message': 'começou a importação'})
+
+        counter = 0
+        percentage = 0
+
         for index in range(1000 * 10):
-            helpers.send_channel_message('test', {'index': index})
             models.Test.objects.create(description='teste - {}'.format(index))
+            counter += 1
+            if counter == 1000:
+                counter = 0
+                percentage += 10
+                helpers.send_channel_message('test', {'message': '{} %'.format(percentage)})

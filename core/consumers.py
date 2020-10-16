@@ -1,5 +1,6 @@
 from urllib import parse
 
+from asgiref.sync import async_to_sync
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 
@@ -22,17 +23,17 @@ class ConsumerBase(AsyncJsonWebsocketConsumer):
     async def group_message(self, event):
         await self.send_json(content=event['content'])
 
-    async def receive_json(self, event, **kwargs):
-        await self.send_json(content=event['content'])
-
 
 class ChatConsumer(ConsumerBase):
     def get_group_name(self):
         query_params = self.get_query_params()
         return 'chat-{}'.format(query_params.get('sala'))
 
-    def receive_json(self, event, **kwargs):
-        super(ChatConsumer, self).receive_json(event, **kwargs)
+    async def receive_json(self, content, **kwargs):
+        await self.channel_layer.group_send(
+            self.get_group_name(),
+            {'type': 'group.message', 'content': content}
+        )
 
 
 class TestConsumer(ConsumerBase):
